@@ -9,7 +9,7 @@ const router = express.Router();
  * @desc    Get All articles
  * @access  Public
  */
-router.get('/',auth, getArticles);
+router.get('/', getArticles);
 
 
 

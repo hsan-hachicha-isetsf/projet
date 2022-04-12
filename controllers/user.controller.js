@@ -41,28 +41,7 @@ const generateAccessToken=(user) =>{
 }
 
 
-export const getuserBYEmail = async (req, res) => { 
-  try {
-      const{email,password}=req.body;
-      const user = await User.findOne({email});
-     if(user==""){  res.status(401).send('utilisateur non existant');
-      return} ;
-     
-      const isMatch=await bcrypt.compare(password,user.password);
-     if(!isMatch) res.status(400).json({msg:'mot de passe incorrect'})
 
-     if(user.role!="Admin") throw Error('Accès authorisé sauf pour admin');
-
-      const accessToken = generateAccessToken(user);
-    //  const refreshToken = generateRefreshToken(user);   
-     res.status(200).json({ 
-      accessToken,
-      //refreshToken
-    })
-  } catch (error) {
-      res.status(404).json({ message: error.message });
-  }
-}
 
 
   export const getuserBYEmailUser = async (req, res) => { 
@@ -79,10 +58,10 @@ export const getuserBYEmail = async (req, res) => {
       }
          
         const accessToken = generateAccessToken(user);
-        const refreshToken = generateRefreshToken(user);
+        //const refreshToken = generateRefreshToken(user);
        res.status(200).json({
         accessToken,
-        refreshToken
+        //refreshToken
       })
     } catch (error) {
         res.status(404).json({ message: error.message });
